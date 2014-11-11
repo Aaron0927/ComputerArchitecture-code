@@ -1,0 +1,193 @@
+//测试 add lw,sw指令
+lw r1,#1000
+lw r2,#1004
+lw r3,#1008
+lw r4,(r1)
+lw r5,(r2)
+add r4,r5,r6
+sw r6,(r3)
+
+//测试sw,lw指令格式的其他情况 
+sw r6,#100c
+lw r4,r1,#fc
+sw r4,r1,#fc
+
+//测试addu指令
+lw r7,#1010
+lw r8,#1014
+addu r7,r8,r9
+
+//测试sub指令
+sub r4,r5,r10
+
+//测试subu指令
+subu r7,r8,r11
+
+//测试mul指令
+mul r4,r5
+
+//测试mulu指令
+mulu r7,r8
+
+//测试div指令
+div r4,r5
+
+//测试divu指令
+divu r7,r8
+
+//测试slt指令
+lw r1,#1020
+lw r2,#1024
+slt r8,r1,r2
+
+//测试sltu指令
+lw r7,#1010
+lw r8,#1014
+sltu r9,r7,r8
+
+//测试and指令
+lw r7,#1100
+lw r8,#1104
+and r9,r7,r8
+
+//测试or指令
+or r9,r7,r8
+
+//测试nor指令
+nor r9,r7,r8
+
+//测试xor指令
+xor r9,r7,r8
+
+//测试addi指令
+addi r8,r2,#80fb
+
+//测试addiu指令
+lw r2,#1014
+addiu r8,r2,#80fb
+
+//测试slti指令
+lw r1,#1100
+slti r9,r1,#80fb
+
+//测试sltiu指令
+sltiu r9,r2,#80fb
+
+//测试andi指令
+lw r7,#1030
+andi r9,r7,#40d
+
+//测试ori指令
+ori r9,r7,#40d
+
+//测试xori指令
+xori r9,r7,#40d
+
+//测试lbu指令
+lw r1,#1028
+lbu r8,r1,#1040
+
+//测试lb指令
+lb r8,r1,#1041
+
+//测试sb指令
+sb r8,r1,#1042
+
+//测试beq指令
+lw r1,#1100
+lw r2,#1100
+beq r1,r2,#2
+lui r9,#4df0
+sb r8,r1,#1042
+
+//测试bne指令
+lw r1,#1100
+lw r2,#1104
+bne r1,r2,#2
+lui r9,#4df0
+sb r8,r1,#1042
+
+//测试blez指令
+lw r1,#1020
+blez r1,#3
+lui r9,#4df0
+sb r8,r1,#1042
+ori r9,r7,#40d
+
+//测试bgtz指令
+bgtz r2,#3
+lui r9,#4df0
+sb r8,r1,#1042
+ori r9,r7,#40d
+
+//测试bltz指令
+bltz r1,#3
+lui r9,#4df0
+sb r8,r1,#1042
+ori r9,r7,#40d
+
+//测试jr指令
+lw r1,#1104
+jr r1
+lui r9,#4df0
+sb r8,r1,#1042
+ori r9,r7,#40d
+
+//测试jalr指令
+lw r2,#1100
+jalr r1,r2
+lui r9,#4df0
+sb r8,r1,#1042
+ori r9,r7,#40d
+
+//测试nop指令
+nop
+
+//测试mfhi指令
+mfhi r1
+
+//测试mflo指令
+mflo r1
+
+//测试lwcl指令
+lw r3,#1028
+lwcl r8,r3,#1060
+
+//测试swcl指令
+swcl r8,r3,#1064
+
+//测试add.s指令
+lwcl r1,r3,#1060
+lwcl r2,r3,#1068
+add.s r8,r1,r2
+
+//测试add.d指令
+lw rt1,r3,#1070
+lw rt2,r3,#1074
+lw rs1,r3,#1080
+lw rs2,r3,#1084
+add.d rd1,rs1,rt1
+
+//测试sub.s指令
+sub.s r8,r1,r2
+
+//测试sub.d指令
+sub.d rd1,rs1,rt1
+
+//测试mul.s指令
+mul.s r8,r1,r2
+
+//测试mul.d指令
+mul.d rd1,rs1,rt1
+
+//测试div.s指令
+div.s r8,r1,r2
+
+//测试div.d指令
+div.d rd1,rs1,rt1
+
+//测试mfepc指令
+mfepc r1
+
+//测试mfco指令
+mfco r1
