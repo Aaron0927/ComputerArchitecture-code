@@ -94,11 +94,11 @@ lb r8,r1,#1041
 sb r8,r1,#1042
 
 //测试beq指令
-lw r1,#1100
-lw r2,#1100
-beq r1,r2,#2
-lui r9,#4df0
-sb r8,r1,#1042
+//lw r1,#1100
+//lw r2,#1100
+//beq r1,r2,#2
+//lui r9,#4df0
+//sb r8,r1,#1042
 
 //测试bne指令
 lw r1,#1100
@@ -181,13 +181,23 @@ mul.s r8,r1,r2
 mul.d rd1,rs1,rt1
 
 //测试div.s指令
-div.s r8,r1,r2
+//div.s r8,r1,r2
 
 //测试div.d指令
-div.d rd1,rs1,rt1
+//div.d rd1,rs1,rt1
 
 //测试mfepc指令
-mfepc r1
+//mfepc r1
 
 //测试mfco指令
-mfco r1
+//mfco r1
+
+//测试j指令
+//j #5d
+//div.d rd1,rs1,rt1
+//div.d rd1,rs1,rt1
+
+//测试jal指令
+jal #5d
+div.d rd1,rs1,rt1
+div.d rd1,rs1,rt1
