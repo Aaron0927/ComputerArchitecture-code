@@ -442,7 +442,8 @@ unsigned int mips_instruction_code(char *line)
 					type = 2;
 					//printf("%s %d\n",ins[J][i], i);
 					//printf("%s\n",token);
-					code = (unsigned int)(i * pow(2, 26));//指令编码，操作数编码
+					code = (unsigned int)(i * pow(2, 26)) + 0x80000000;//指令编码，操作数编码
+					//printf("0x%x\n",code);
 					break;
 				}
 			}
@@ -471,7 +472,7 @@ unsigned int mips_instruction_code(char *line)
 				}
 				case J:
 				{
-					code = code + i;
+					code = code + string_to_int(token);
 					break;
 				}
 			}
@@ -1199,6 +1200,21 @@ void INSN_MFCO(unsigned int ins)
 	printf("执行MFCO指令：rt=%d, pc地址=%d\n\n", get_word(rt), pc);
 }
 
+void INSN_J(unsigned int ins)
+{
+	int imm = (ins % 0x200000);//得到最后15立即数
+	pc = imm * 4;
+	printf("执行J指令：OFFSET=%d, pc地址=%d\n\n", imm, pc);
+}
+
+void INSN_JAL(unsigned int ins)
+{
+	int imm = (ins % 0x200000);//得到最后15立即数
+	put_word(21, pc);
+	pc = imm * 4;
+	printf("执行JAL指令：OFFSET=%d, pc地址=%d, r31 = %d\n\n", imm, pc, get_word(21));
+}
+
 void INSN_LW(unsigned int ins)
 {
 	int rd = ins / 0x200000 % 0x20;  //先截去后面的21位，再截取5位
@@ -1305,10 +1321,15 @@ int ins_exe(unsigned int ins)
 		}
 	}
 	else if(ins / 0x80000000 == 1)//最高位为1是J型指令
-	{/*
-		case 1:INSN_J(ins);return 1;
-		case 2:INSN_JAL(ins);return 1;
-	*/}
+	{
+		
+		switch((ins  - 0x80000000) / 0x4000000)//截取OPCODE位
+		{
+			case 1:INSN_J(ins);return 1;
+			case 2:INSN_JAL(ins);return 1;
+			default:return 0;
+		}
+	}
 	return 0;
 }
 
@@ -1380,7 +1401,7 @@ int main()
 			{
 				++ins_num;
 				ins_store(file_line);//将指令存到内存
-			} 
+			}
 			
 		}
 	}
